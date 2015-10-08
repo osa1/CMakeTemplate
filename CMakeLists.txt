@@ -33,9 +33,13 @@ set(sdl_ttf_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/${sdl_ttf_DIR}")
 set(sdl_ttf_INSTALL_DIR "${sdl_ttf_PREFIX}/build")
 
 ExternalProject_Add(sdl_ttf
+    DEPENDS sdl
     PREFIX ${sdl_ttf_PREFIX}
     URL https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.12.tar.gz
-    CONFIGURE_COMMAND ${sdl_ttf_PREFIX}/src/sdl_ttf/configure --prefix=${sdl_ttf_INSTALL_DIR}
+    CONFIGURE_COMMAND
+        ${sdl_ttf_PREFIX}/src/sdl_ttf/configure
+            --prefix=${sdl_ttf_INSTALL_DIR}
+            --with-sdl-prefix=${sdl_INSTALL_DIR}
     BUILD_COMMAND ${MAKE}
     )
 
@@ -50,9 +54,13 @@ set(sdl_image_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/${sdl_image_DIR}")
 set(sdl_image_INSTALL_DIR "${sdl_image_PREFIX}/build")
 
 ExternalProject_Add(sdl_image
+    DEPENDS sdl
     PREFIX ${sdl_image_PREFIX}
     URL https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.0.tar.gz
-    CONFIGURE_COMMAND ${sdl_image_PREFIX}/src/sdl_image/configure --prefix=${sdl_image_INSTALL_DIR}
+    CONFIGURE_COMMAND
+        ${sdl_image_PREFIX}/src/sdl_image/configure
+            --prefix=${sdl_image_INSTALL_DIR}
+            --with-sdl-prefix=${sdl_INSTALL_DIR}
     BUILD_COMMAND ${MAKE}
     )
 
