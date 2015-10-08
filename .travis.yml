@@ -1,0 +1,13 @@
+language: cpp
+
+before_script:
+    - mkdir build
+
+script:
+    - cd build
+    - cmake ..
+    - make
+
+after_success:
+    # This may not work as it initializes a window etc.
+    - ./main
