@@ -91,15 +91,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra")
 
 add_executable(main main.cpp)
 
-target_link_libraries(main
-    ${sdl_INSTALL_DIR}/lib/libSDL2.a
-    ${sdl_ttf_INSTALL_DIR}/lib64/libSDL2_ttf.a
-    ${sdl_image_INSTALL_DIR}/lib64/libSDL2_image.a
-    ${glew_INSTALL_DIR}/lib64/libGLEW.a
-    pthread dl freetype GL)
-
-# TODO: I can't test dynamic linking right now as I already have all these
-# libraries installed system-wide.
-# target_link_libraries(main SDL2 SDL2_ttf SDL2_image GLEW)
+target_link_libraries(main SDL2 SDL2_ttf SDL2_image GLEW)
 
 add_dependencies(main sdl sdl_ttf sdl_image glew)
