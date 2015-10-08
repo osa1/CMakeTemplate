@@ -1,6 +1,7 @@
 language: cpp
 
 before_script:
+    - cmake --version
     - mkdir build
 
 script:
