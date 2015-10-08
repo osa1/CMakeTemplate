@@ -45,6 +45,7 @@ ExternalProject_Add(sdl_ttf
 
 include_directories("${sdl_ttf_INSTALL_DIR}/include")
 link_directories("${sdl_ttf_INSTALL_DIR}/lib64")
+link_directories("${sdl_ttf_INSTALL_DIR}/lib")
 
 ################################################################################
 # SDL2_image settings
@@ -66,6 +67,7 @@ ExternalProject_Add(sdl_image
 
 include_directories("${sdl_image_INSTALL_DIR}/include")
 link_directories("${sdl_image_INSTALL_DIR}/lib64")
+link_directories("${sdl_image_INSTALL_DIR}/lib")
 
 ################################################################################
 # GLEW settings
