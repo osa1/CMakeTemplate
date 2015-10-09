@@ -5,6 +5,8 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
 
+#include <glm/glm.hpp>
+
 #include <iostream>
 #include <stdio.h>
 
@@ -82,6 +84,13 @@ int main()
     }
 
     SDL_Quit();
+
+    ////////////////////////
+    // Make sure we link glm
+    ////////////////////////
+
+    glm::vec3 v = glm::vec3(1.0f, 1.0f, 0.0f);
+    std::cout << "vector length: " << glm::length(v) << std::endl;
 
     return 0;
 }

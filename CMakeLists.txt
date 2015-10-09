@@ -88,6 +88,26 @@ include_directories("${glew_INSTALL_DIR}/include")
 link_directories("${glew_INSTALL_DIR}/lib64")
 
 ################################################################################
+# glm settings
+
+set(glm_DIR "glm")
+set(glm_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/${glm_DIR}")
+set(glm_INSTALL_DIR "${glm_PREFIX}/build")
+set(glm_CMAKE_ARGS
+    -DCMAKE_INSTALL_PREFIX=${glm_INSTALL_DIR}
+    -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+    -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS})
+
+ExternalProject_Add(glm
+    PREFIX ${glm_PREFIX}
+    URL https://github.com/g-truc/glm/archive/0.9.7.1.tar.gz
+    CMAKE_ARGS ${glm_CMAKE_ARGS}
+    )
+
+include_directories("${glm_INSTALL_DIR}/include")
+link_directories("${glm_INSTALL_DIR}/lib")
+
+################################################################################
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra -std=c++11")
 
@@ -95,4 +115,4 @@ add_executable(main main.cpp)
 
 target_link_libraries(main SDL2 SDL2_ttf SDL2_image GLEW)
 
-add_dependencies(main sdl sdl_ttf sdl_image glew)
+add_dependencies(main sdl sdl_ttf sdl_image glew glm)
