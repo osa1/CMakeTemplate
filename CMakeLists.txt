@@ -108,11 +108,32 @@ include_directories("${glm_INSTALL_DIR}/include")
 link_directories("${glm_INSTALL_DIR}/lib")
 
 ################################################################################
+# FreeType settings
+
+set(freetype_DIR "FreeType")
+set(freetype_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/${freetype_DIR}")
+set(freetype_INSTALL_DIR "${freetype_PREFIX}/build")
+
+ExternalProject_Add(ft
+    PREFIX ${freetype_PREFIX}
+    URL http://download.savannah.gnu.org/releases/freetype/freetype-2.6.1.tar.gz
+    CONFIGURE_COMMAND
+        ${freetype_PREFIX}/src/ft/configure
+            --prefix=${freetype_INSTALL_DIR}
+    BUILD_COMMAND ${make}
+    INSTALL_COMMAND ${install}
+    )
+
+include_directories("${freetype_INSTALL_DIR}/include/freetype2")
+link_directories("${freetype_INSTALL_DIR}/lib64")
+link_directories("${freetype_INSTALL_DIR}/lib")
+
+################################################################################
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra -std=c++11")
 
 add_executable(main main.cpp)
 
-target_link_libraries(main SDL2 SDL2_ttf SDL2_image GLEW)
+target_link_libraries(main SDL2 SDL2_ttf SDL2_image GLEW freetype)
 
-add_dependencies(main sdl sdl_ttf sdl_image glew glm)
+add_dependencies(main sdl sdl_ttf sdl_image glew glm ft)

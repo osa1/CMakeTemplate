@@ -7,6 +7,9 @@
 
 #include <glm/glm.hpp>
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include <iostream>
 #include <stdio.h>
 
@@ -91,6 +94,21 @@ int main()
 
     glm::vec3 v = glm::vec3(1.0f, 1.0f, 0.0f);
     std::cout << "vector length: " << glm::length(v) << std::endl;
+
+    ///////////////////////////
+    // Make sure FreeType inits
+    ///////////////////////////
+
+    FT_Library ft;
+    if (FT_Init_FreeType(&ft))
+    {
+        std::cout << "Could not initialize FreeType" << std::endl;
+        return 1;
+    }
+
+    FT_Done_FreeType(ft);
+
+    ////////////////
 
     return 0;
 }
